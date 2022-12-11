@@ -1,0 +1,12 @@
+{
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/er-data",
+        "handler": "content-model-diagram.getERData",
+        "config": {
+          "policies": []
+        }
+      }
+    ]
+  }
