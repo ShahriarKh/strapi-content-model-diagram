@@ -17,9 +17,11 @@ Feel free to test it (probably on a dev environment!) and help me develop it fur
 
 
 ## 🗺 Roadmap
-- [ ] Add "Save Image"
-- [ ] Enable/Disable strapi content types (like `admin::api-token-permission`) directly from UI
-- [ ] Hide nodes
-- [ ] Save/Load diagram states
+- [ ] Add support for Dynamic Zones and Components
+- [ ] Feature: Save diagram as Image
+- [ ] Feature: Enable/Disable strapi content types (like `admin::api-token-permission`) directly from UI
+- [ ] Feature: Hide nodes
+- [ ] Feature: Only show selected node's edges
+- [ ] Feature: Save/Load diagram states
 - [ ] Make sure the plugin is secure
 - [ ] Publish 🚀
