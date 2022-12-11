@@ -42,10 +42,12 @@ function getIcon(attrType) {
     case "password":
       return <Password />;
     case "boolean":
-      return <Boolean size="32px" />;
+      return <Boolean />;
     case "relation":
       return <Relation />;
     case "datetime":
+    case "date":
+    case "time":
       return <Date />;
     case "integer":
     case "decimal":
