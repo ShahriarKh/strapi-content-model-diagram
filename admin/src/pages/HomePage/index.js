@@ -48,6 +48,7 @@ const HomePage = () => {
   const [showTypes, setShowTypes] = useState(true);
   const [showIcons, setShowIcons] = useState(true);
   const [showRelationsOnly, setShowRelationsOnly] = useState(false);
+  const [hideStrapiFields, setHideStrapiFields] = useState(false);
   const [edgeType, setEdgeType] = useState("smartbezier");
   const [backgroundPattern, setBackgroundPattern] = useState("dots");
   const [preventScroll, setPreventScroll] = useState(true);
@@ -116,6 +117,7 @@ const HomePage = () => {
                 ...node,
                 showIcon: showIcons,
                 showType: showTypes,
+                hideStrapiFields: hideStrapiFields,
                 showRelationsOnly: showRelationsOnly,
               },
             },
@@ -143,12 +145,13 @@ const HomePage = () => {
           ...node.data,
           showIcon: showIcons,
           showType: showTypes,
+          hideStrapiFields: hideStrapiFields,
           showRelationsOnly: showRelationsOnly,
         };
         return node;
       })
     );
-  }, [setNodes, showIcons, showTypes, showRelationsOnly]);
+  }, [setNodes, showIcons, showTypes, showRelationsOnly, hideStrapiFields]);
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -199,6 +202,13 @@ const HomePage = () => {
           value={showRelationsOnly}
         >
           Only Relations
+        </Checkbox>
+        <Checkbox
+          name="hide-strapi-fields"
+          onValueChange={() => setHideStrapiFields(!hideStrapiFields)}
+          value={hideStrapiFields}
+        >
+          Hide Strapi Fields
         </Checkbox>
         <Checkbox
           name="snap-to-grid"

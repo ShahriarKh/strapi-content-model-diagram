@@ -100,6 +100,18 @@ export default function CustomNode({ data }) {
     attributesToShow = attributesToShow.filter((x) => x[1].type === "relation");
   }
 
+  if (data.hideStrapiFields) {
+    attributesToShow = attributesToShow.filter(
+      (x) =>
+        !(
+          x[0] === "updatedAt" ||
+          x[0] === "createdAt" ||
+          x[0] === "updatedBy" ||
+          x[0] === "createdBy"
+        )
+    );
+  }
+
   const theme = useTheme();
 
   return (
