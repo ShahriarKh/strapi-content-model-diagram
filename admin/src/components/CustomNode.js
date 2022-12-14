@@ -19,7 +19,7 @@ import {
   Boolean,
   Json,
   Relation,
-  UID,
+  Uid,
   OneToMany,
   OneToOne,
   ManyToMany,
@@ -56,7 +56,7 @@ function getIcon(attrType) {
     case "json":
       return <Json />;
     case "uid":
-      return <UID />;
+      return <Uid />;
 
     case "onetomany": //
       return <OneToMany />;
