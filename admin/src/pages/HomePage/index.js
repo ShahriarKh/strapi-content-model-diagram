@@ -48,7 +48,8 @@ const HomePage = () => {
   const [showTypes, setShowTypes] = useState(true);
   const [showIcons, setShowIcons] = useState(true);
   const [showRelationsOnly, setShowRelationsOnly] = useState(false);
-  const [hideStrapiFields, setHideStrapiFields] = useState(false);
+  const [hideStrapiFields, setHideStrapiFields] = useState(true);
+  const [hideEdges, setHideEdges] = useState(false);
   const [edgeType, setEdgeType] = useState("smartbezier");
   const [backgroundPattern, setBackgroundPattern] = useState("dots");
   const [preventScroll, setPreventScroll] = useState(true);
@@ -78,7 +79,11 @@ const HomePage = () => {
         Object.keys(contentType.attributes).map((attr) => {
           if (contentType.attributes[attr].type == "relation") {
             // only add edge if target node is not excluded (not hidden)
-            if (erData.some((node) => node.key === contentType.attributes[attr].target)) {
+            if (
+              erData.some(
+                (node) => node.key === contentType.attributes[attr].target
+              )
+            ) {
               newEdges = [
                 ...newEdges,
                 {
@@ -131,11 +136,11 @@ const HomePage = () => {
   useEffect(() => {
     setEdges((theEdges) =>
       theEdges.map((edge) => {
-        edge = { ...edge, type: edgeType };
+        edge = { ...edge, type: edgeType, hidden: hideEdges };
         return edge;
       })
     );
-  }, [setEdges, edgeType]);
+  }, [setEdges, edgeType, hideEdges]);
 
   // ========== Apply Node Options ==========
   useEffect(() => {
@@ -179,6 +184,43 @@ const HomePage = () => {
         primaryAction={<Button startIcon={<Download />}>Save Image</Button>}
       />
 
+      <div
+        style={{
+          height: preventScroll ? "calc(100vh - 212px)" : "100vh",
+          borderTop: "1px solid #32324d",
+          borderBottom: "1px solid #32324d",
+        }}
+      >
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          nodeTypes={nodeTypes}
+          edgeTypes={edgeTypes}
+          fitView
+          preventScrolling={preventScroll}
+          snapGrid={[25, 25]}
+          {...(shouldSnapToGrid ? { snapToGrid: true } : {})}
+          fitViewOptions={{
+            maxZoom: 1,
+          }}
+        >
+          <Controls>
+            <Tooltip description="Toggle Scroll Behavior">
+              <ControlButton onClick={() => setPreventScroll(!preventScroll)}>
+                <Layout />
+              </ControlButton>
+            </Tooltip>
+          </Controls>
+          <Background
+            variant={backgroundPattern}
+            color={getBackgroundColor(backgroundPattern)}
+          />
+        </ReactFlow>
+      </div>
+
       <Flex padding="0 56px 8px" gap="24px">
         <Checkbox
           name="show-type-names"
@@ -209,6 +251,13 @@ const HomePage = () => {
           value={hideStrapiFields}
         >
           Hide Strapi Fields
+        </Checkbox>
+        <Checkbox
+          name="hide-edges"
+          onValueChange={() => setHideEdges(!hideEdges)}
+          value={hideEdges}
+        >
+          Hide Edges
         </Checkbox>
         <Checkbox
           name="snap-to-grid"
@@ -246,37 +295,6 @@ const HomePage = () => {
           <Option value="none">None</Option>
         </Select>
       </Flex>
-
-      <div style={{ height: preventScroll ? "calc(100vh - 212px)" : "100vh" }}>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          nodeTypes={nodeTypes}
-          edgeTypes={edgeTypes}
-          fitView
-          preventScrolling={preventScroll}
-          snapGrid={[25, 25]}
-          {...(shouldSnapToGrid ? { snapToGrid: true } : {})}
-          fitViewOptions={{
-            maxZoom: 1,
-          }}
-        >
-          <Controls>
-            <Tooltip description="Toggle Scroll Behavior">
-              <ControlButton onClick={() => setPreventScroll(!preventScroll)}>
-                <Layout />
-              </ControlButton>
-            </Tooltip>
-          </Controls>
-          <Background
-            variant={backgroundPattern}
-            color={getBackgroundColor(backgroundPattern)}
-          />
-        </ReactFlow>
-      </div>
     </>
   );
 };
