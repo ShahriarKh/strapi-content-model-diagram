@@ -109,7 +109,8 @@ export default function CustomNode({ data }) {
           x[0] === "updatedAt" ||
           x[0] === "createdAt" ||
           x[0] === "updatedBy" ||
-          x[0] === "createdBy"
+          x[0] === "createdBy" || 
+          x[0] === "publishedAt"
         )
     );
   }
