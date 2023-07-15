@@ -1,8 +1,15 @@
 # Strapi plugin content-model-diagram
 
-Displays an ERD (Entity Relation Diagram) based on your content types.  
+.
+
 > **Warning**  
-> The plugin is under development.
+> Please check out the newer version of this plugin 👉🏽 [Strapi Content-Type Explorer](https://github.com/ShahriarKh/strapi-content-type-explorer)  
+> This one is no longer maintained.
+
+
+.
+
+Displays an ERD (Entity Relation Diagram) based on your content types.  
 
 ---
 
